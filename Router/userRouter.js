@@ -119,24 +119,17 @@ router.get("/random", auth, async (req, res) => {
 
 
   try {
-    function genRandom(min, max) {
-      var h = new Date().getSeconds()
-      const t1 = new Date().getMilliseconds()
-      var result
-      const t2 = new Date().getMilliseconds()
-      const t3 = new Date().getMilliseconds()
-      const sec = (t3*h)
-      console.log(t2)
-      result = ((((max - min) * t1) / sec)).toFixed(0)
-      console.log(result)
-      if(result<20) {
-          return result = ((((max - min) * t1) / t2)).toFixed(0)
-      }
-      else {
-          return result
-      }
-    }
-    var resp = genRandom(20, 120000)
+    function randomNumber(min, max) { 
+      var b = new Date()
+      var f
+      var c = new Date()
+      var d =  c.getMilliseconds() *  b.getSeconds()
+      var a = d * (max - min) + min;
+      var f = a/10000000000
+      var res = f*(max - min) + min
+      return res.toFixed(0)
+  } 
+    var resp = randomNumber(20, 120000)
     res.status(200)
         .json({random:resp})
   } catch (error) {
